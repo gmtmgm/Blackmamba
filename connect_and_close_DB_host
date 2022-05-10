@@ -1,0 +1,19 @@
+import ymysql
+
+db = None
+try:
+  db = pymysql.connect
+  host = '127.0.0.1',
+  user = 'Blackmamba'
+  password = 'ae'
+  db = 'messages'
+  charset='utf-8'
+)
+
+except Exception as e:
+  print(e)
+  
+finally:
+  if db is not None:
+    db.close()
+    print("DB 연결 닫기 성공)
