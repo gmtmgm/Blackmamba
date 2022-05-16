@@ -1,4 +1,4 @@
-import ymysql
+import pymysql
 
 db = None
 try:
