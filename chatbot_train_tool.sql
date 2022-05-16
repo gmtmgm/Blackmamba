@@ -1,12 +1,16 @@
-CREATE TABLE `chatbot_train_data` (
+CREATE TABLE `메세지` (
     `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `ner` VARCHAR(1024),
     `query` TEXT,
-    `answer` TEXT NOT NULL,
-    `answer_image` VARCHAR(2048)
+    `answer` TEXT NOT NULL
 )
 
-INSERT INTO chatbot_train_data VALUES ('인사', , '안녕하세요', '반갑습니다.', );
-INSERT INTO chatbot_train_data VALUES ('브랜드 입력', , '브랜드 이이름', '%s를 선택하였습니다. %s의 메뉴를 선택해 주십시오.', );
-INSERT INTO chatbot_train_data VALUES ('메뉴 입력', , '메뉴이름', '%s를 선택하였습니다. %s이 가지고 있는 알러지는 다음과 같습니다.', );
-INSERT INTO chatbot_train_data VALUES ('알러지 입력', , '알러지이름', '%s를 입력하였습니다. % 알러지 결과를 보여드립니다.', );
+INSERT INTO 메세지 VALUES ('시작', , '안녕하세요', "알레르기 보여줘, 챗봇 알보입니다!\n\n1. 아래의 버튼을 통해 프랜차이즈 목록을 확인할 수 있습니다.\n2. 메뉴 이름/프랜차이즈 명을 입력하여 검색할 수 있습니다.\n3. 알레르기 성분을 채팅으로 입력하여, 필터를 적용할 수 있습니다.");
+INSERT INTO 메세지 VALUES ('인사', , '안녕하세요', '반갑습니다.');
+INSERT INTO 메세지 VALUES ('프랜차이즈 선택', ,'',"현재 입력된 프랜차이즈 목록입니다.\n\n프랜차이즈 명을 선택하면 메뉴를 확인할 수 있습니다.");
+INSERT INTO 메세지 VALUES ('메뉴 선택', ,'',"'%s' 프랜차이즈에 등록된 메뉴 목록입니다. 메뉴를 선택하여 알레르기 성분을 확인할 수 있습니다.");
+INSERT INTO 메세지 VALUES ('프랜차이즈 입력', ,'',"'%s' 프랜차이즈에 등록된 메뉴 목록입니다. 메뉴를 선택하여 알레르기 성분을 확인할 수 있습니다.");
+INSERT INTO 메세지 VALUES ('메뉴 입력', ,'',"'%s' 프랜차이즈에 등록된 메뉴입니다.\n\n'%s' 메뉴 알레르기 성분\n\n%?.");
+INSERT INTO 메세지 VALUES ('알레르기 성분 입력', ,'',"%s에 포함된 성분입니다.\n%s가 포함된 매뉴를 필터링해서 보여줄까요?");
+INSERT INTO 메세지 VALUES ('알레르기 성분 필터링', ,'',"%s 성분이 포함된 메뉴를 필터링하였습니다. 이제부터 메뉴 검색시, %s 성분이 포함된 메뉴가 제외됩니다.");
+INSERT INTO 메세지 VALUES ('입력 실패', ,'',"등록되지 않은 프랜차이즈 또는 메뉴이거나, 이해할 수 없는 내용입니다.");
