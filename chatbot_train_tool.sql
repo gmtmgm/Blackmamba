@@ -1,8 +1,10 @@
 CREATE TABLE `메세지` (
-    `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `ner` VARCHAR(1024),
-    `query` TEXT,
-    `answer` TEXT NOT NULL
+    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `intent` VARCHAR(45) NULL,
+    `ner` VARCHAR(1024) NULL,
+    `query` TEXT NULL,
+    `answer` TEXT NOT NULL,
+    PRIMARY KEY(`id`)
 )
 
 INSERT INTO 메세지 VALUES ('시작', , '안녕하세요', "알레르기 보여줘, 챗봇 알보입니다!\n\n1. 아래의 버튼을 통해 프랜차이즈 목록을 확인할 수 있습니다.\n2. 메뉴 이름/프랜차이즈 명을 입력하여 검색할 수 있습니다.\n3. 알레르기 성분을 채팅으로 입력하여, 필터를 적용할 수 있습니다.");
