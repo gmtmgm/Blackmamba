@@ -1,0 +1,38 @@
+#프랜차이즈명
+프랜차이즈 목록	NNP
+프랜차이즈	NNP
+프랜차이즈명	NNP
+BBQ	NNP
+BHC	NNP
+공차	NNP
+던킨도넛	NNP
+도미노피자	NNP
+맥도날드	NNP
+명랑핫도그	NNP
+배스킨라빈스	NNP
+본죽	NNP
+샐러디	NNP
+스타벅스	NNP
+와플대학	NNP
+파리바게트	NNP
+한솥	NNP
+#알레르기 성분명
+메밀	NNP
+밀	NNP
+대두	NNP
+호두	NNP
+땅콩	NNP
+복숭아	NNP
+토마토	NNP
+돼지고기	NNP
+난류(계란)	NNP
+우유	NNP
+닭고기	NNP
+쇠고기	NNP
+새우	NNP
+고등어	NNP
+게	NNP
+아황산류	NNP
+오징어	NNP
+조개류(어패류)	NNP
+#메뉴이름(추가예정)
