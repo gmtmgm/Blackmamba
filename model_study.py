@@ -1,21 +1,39 @@
 import tensorflow as tf
-from tag import *
-import pandas as pd
+from tokenizing import *
+import cx_Oracle as cx
 from tensorflow.keras import preprocessing
 from tensorflow.keras.models import Model
 from tensorflow.keras.layers import Input, Embedding, Dense, Dropout, Conv1D, GlobalMaxPool1D, concatenate
+import os
 
-q_sentences = [] 
-a_sentences = [] 
-sen_tag = [] 
-q_token = [] 
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
-train_file = "./ChatbotData.csv"
-data = pd.read_csv(train_file, delimiter=',')
-features = data['Q'].tolist()
-labels = data['label'].tolist()
+q_list = []
+i_list = []
 
-corpus = [preprocessing.text.text_to_word_sequence(text) for text in features]
+dsn = cx.makedsn("localhost", 1521, service_name= "XE")
+db = cx.connect(user="c##Blackmamba", password="blackmamba", dsn=dsn)
+
+cur = db.cursor()
+questiondata = cur.execute("select question from 메세지")
+
+for q in questiondata:
+    qq = list(q)
+    for r in qq:
+        q_list.append(str(r))
+
+cur = db.cursor()
+intentdata = cur.execute("select intent_id from 메세지")
+
+for i in intentdata:
+    ii = list(i)
+    for r in ii:
+        i_list.append(r)
+
+cur.close()
+db.close()
+
+corpus = [preprocessing.text.text_to_word_sequence(text) for text in q_list]
 tokenizer = preprocessing.text.Tokenizer()
 tokenizer.fit_on_texts(corpus)
 sequences = tokenizer.texts_to_sequences(corpus)
@@ -24,8 +42,8 @@ word_index = tokenizer.word_index
 MAX_SEQ_LEN = 15
 padded_seqs = preprocessing.sequence.pad_sequences(sequences, maxlen=MAX_SEQ_LEN, padding='post')
 
-ds = tf.data.Dataset.from_tensor_slices((padded_seqs, labels))
-ds = ds.shuffle(len(features))
+ds = tf.data.Dataset.from_tensor_slices((padded_seqs, i_list))
+ds = ds.shuffle(len(q_list))
 
 train_size = int(len(padded_seqs) * 0.7)
 val_size = int(len(padded_seqs) * 0.2)
@@ -69,8 +87,8 @@ concat = concatenate([pool1, pool2, pool3])
 
 hidden = Dense(128, activation=tf.nn.relu)(concat)
 dropout_hidden = Dropout(rate=dropout_prob)(hidden)
-logits = Dense(3, name='logits')(dropout_hidden)
-predictions = Dense(3, activation=tf.nn.softmax)(logits)
+logits = Dense(7, name='logits')(dropout_hidden)
+predictions = Dense(7, activation=tf.nn.softmax)(logits)
 
 model = Model(inputs=input_layer, outputs=predictions)
 model.compile(optimizer='adam',
@@ -84,15 +102,3 @@ print('Accuracy: %f' % (accuracy * 100))
 print('loss: %f' % (loss))
 
 model.save('cnn_model.h5')
-
-
-"""
-for line in readdata:
-    q_sentences.append(line['query'])
-    a_sentences.append(line['answer'])
-    if line[2] not in sen_tag:
-        sen_tag.append(line['intent'])
-
-for data in q_sentences:
-    q_token.append(tokendatatokenize(data))
-"""
