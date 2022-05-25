@@ -1,4 +1,3 @@
-
 import cx_Oracle as cx
 
 class Database:
@@ -31,8 +30,7 @@ class Database:
         cur = self.conn.cursor()
         cursor = cur.execute(sql)
         for i in cursor:
-            for ii in i:
-                data.append(ii)
+            data.extend(i)
         cur.close()
         return data
 
@@ -41,12 +39,3 @@ db = Database(
     host="localhost", port=1521, service_name="XE", 
     user="c##Blackmamba", password="blackmamba"
 )
-
-"""
-테스트
-db.connect()
-
-sql = "select * from 프랜차이즈"
-print(db.exedata(sql))
-db.close()
-"""
