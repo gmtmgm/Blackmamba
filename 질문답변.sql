@@ -1,29 +1,77 @@
-CREATE TABLE ÀÇµµ (
+DROP TABLE ë©”ì„¸ì§€;
+DROP TABLE ë‹µë³€;
+DROP TABLE ì˜ë„;
+
+
+
+CREATE TABLE ì˜ë„ (
     intent_id NUMBER NOT NULL,
-    intent VARCHAR2(20),
+    intent VARCHAR2(40),
     PRIMARY KEY(intent_id)
 );
 
-CREATE TABLE ¸Ş¼¼Áö (
-    intent_id VARCHAR2(45) NOT NULL,
-    question VARCHAR2 NOT NULL,
-    answer VARCHAR2(170) NOT NULL,
-    FOREIGN KEY(intent_id) REFERENCES ÀÇµµ(intent_id)
+CREATE TABLE ë‹µë³€ (
+    intent_id NUMBER NOT NULL,
+    answer_id NUMBER NOT NULL,
+    answer VARCHAR2(500),
+    PRIMARY KEY (answer_id, intent_id),
+    FOREIGN KEY(intent_id) REFERENCES ì˜ë„(intent_id)
 );
 
-INSERT INTO ÀÇµµ(intent_id, intent) VALUES(1, '¾È³»');
-INSERT INTO ÀÇµµ(intent_id, intent) VALUES(2, 'ÇÁ·£Â÷ÀÌÁî');
-INSERT INTO ÀÇµµ(intent_id, intent) VALUES(3, '¸Ş´º');
-INSERT INTO ÀÇµµ(intent_id, intent) VALUES(4, '¾Ë·¹¸£±â ¼ººĞ Ç¥½Ã');
-INSERT INTO ÀÇµµ(intent_id, intent) VALUES(5, '¾Ë·¹¸£±â ¼ººĞ ÀÔ·Â');
-INSERT INTO ÀÇµµ(intent_id, intent) VALUES(6, '¾Ë·¹¸£±â ¼ººĞ ÇÊÅÍ¸µ');
-INSERT INTO ÀÇµµ(intent_id, intent) VALUES(7, 'ÀÔ·Â ½ÇÆĞ');
+CREATE TABLE ë©”ì„¸ì§€ (
+    intent_id NUMBER NOT NULL,
+    question VARCHAR2(200) NOT NULL,
+    answer_id NUMBER NOT NULL,
+    FOREIGN KEY(intent_id) REFERENCES ì˜ë„(intent_id)
+    
+);
 
-INSERT INTO ¸Ş¼¼Áö (intent_id, question, answer) VALUES (1, '½ÃÀÛÇÏ±â', '¾Ë·¹¸£±â º¸¿©Áà, Ãªº¿ ¾Ëº¸ÀÔ´Ï´Ù!\n\n1. ¾Æ·¡ÀÇ ¹öÆ°À» ÅëÇØ ÇÁ·£Â÷ÀÌÁî ¸ñ·ÏÀ» È®ÀÎÇÒ ¼ö ÀÖ½À´Ï´Ù.\n2. ¸Ş´º ÀÌ¸§/ÇÁ·£Â÷ÀÌÁî ¸íÀ» ÀÔ·ÂÇÏ¿© °Ë»öÇÒ ¼ö ÀÖ½À´Ï´Ù.\n3. ¾Ë·¹¸£±â ¼ººĞÀ» Ã¤ÆÃÀ¸·Î ÀÔ·ÂÇÏ¿©, ÇÊÅÍ¸¦ Àû¿ëÇÒ ¼ö ÀÖ½À´Ï´Ù.');
-INSERT INTO ¸Ş¼¼Áö (intent_id, question, answer) VALUES (2, 'ÇÁ·£Â÷ÀÌÁî ¸ñ·Ï','ÇÁ·£Â÷ÀÌÁî ¸ñ·ÏÀÔ´Ï´Ù.\n\nÇÁ·£Â÷ÀÌÁî ¸íÀ» ¼±ÅÃÇÏ¸é ¸Ş´º¸¦ È®ÀÎÇÒ ¼ö ÀÖ½À´Ï´Ù.');
-INSERT INTO ¸Ş¼¼Áö (intent_id, question, answer) VALUES (3, 'µµ¹Ì³ëÇÇÀÚ','%s ÇÁ·£Â÷ÀÌÁî¿¡ µî·ÏµÈ ¸Ş´º ¸ñ·ÏÀÔ´Ï´Ù. ¸Ş´º¸¦ ¼±ÅÃÇÏ¿© ¾Ë·¹¸£±â ¼ººĞÀ» È®ÀÎÇÒ ¼ö ÀÖ½À´Ï´Ù.');
-INSERT INTO ¸Ş¼¼Áö (intent_id, question, answer) VALUES (3, '¸Ş´º','%s ÇÁ·£Â÷ÀÌÁî¿¡ µî·ÏµÈ ¸Ş´º ¸ñ·ÏÀÔ´Ï´Ù. ¸Ş´º¸¦ ¼±ÅÃÇÏ¿© ¾Ë·¹¸£±â ¼ººĞÀ» È®ÀÎÇÒ ¼ö ÀÖ½À´Ï´Ù.');
-INSERT INTO ¸Ş¼¼Áö (intent_id, question, answer) VALUES (4, '¸Ş´º ÀÔ·Â','%s ÇÁ·£Â÷ÀÌÁî¿¡ µî·ÏµÈ ¸Ş´ºÀÔ´Ï´Ù.\n\n%s ¸Ş´º ¾Ë·¹¸£±â ¼ººĞ\n\n%?.');
-INSERT INTO ¸Ş¼¼Áö (intent_id, question, answer) VALUES (5, '¾Ë·¹¸£±â ¼ººĞ ÀÔ·Â','%s¿¡ Æ÷ÇÔµÈ ¼ººĞÀÔ´Ï´Ù.\n%s°¡ Æ÷ÇÔµÈ ¸Å´º¸¦ ÇÊÅÍ¸µÇØ¼­ º¸¿©ÁÙ±î¿ä?');
-INSERT INTO ¸Ş¼¼Áö (intent_id, question, answer) VALUES (6, '¾Ë·¹¸£±â ¼ººĞ ÇÊÅÍ¸µ ¹öÆ°','%s ¼ººĞÀÌ Æ÷ÇÔµÈ ¸Ş´º¸¦ ÇÊÅÍ¸µÇÏ¿´½À´Ï´Ù. ÀÌÁ¦ºÎÅÍ ¸Ş´º °Ë»ö½Ã, %s ¼ººĞÀÌ Æ÷ÇÔµÈ ¸Ş´º°¡ Á¦¿ÜµË´Ï´Ù.');
-INSERT INTO ¸Ş¼¼Áö (intent_id, question, answer) VALUES (7, 'DB¿¡ Á¸ÀçÇÏÁö ¾Ê´Â ÀÌ¸§', 'µî·ÏµÇÁö ¾ÊÀº ÇÁ·£Â÷ÀÌÁî ¶Ç´Â ¸Ş´ºÀÌ°Å³ª, ÀÌÇØÇÒ ¼ö ¾ø´Â ³»¿ëÀÔ´Ï´Ù.');
+INSERT INTO ì˜ë„(intent_id, intent) VALUES(0, 'ì•ˆë‚´');
+INSERT INTO ì˜ë„(intent_id, intent) VALUES(1, 'í”„ëœì°¨ì´ì¦ˆ');
+INSERT INTO ì˜ë„(intent_id, intent) VALUES(2, 'ë©”ë‰´');
+INSERT INTO ì˜ë„(intent_id, intent) VALUES(3, 'ì•Œë ˆë¥´ê¸° ì„±ë¶„ í‘œì‹œ');
+INSERT INTO ì˜ë„(intent_id, intent) VALUES(4, 'ì•Œë ˆë¥´ê¸° ì„±ë¶„ ì…ë ¥');
+INSERT INTO ì˜ë„(intent_id, intent) VALUES(5, 'ì•Œë ˆë¥´ê¸° ì„±ë¶„ í•„í„°ë§');
+INSERT INTO ì˜ë„(intent_id, intent) VALUES(6, 'ì…ë ¥ ì‹¤íŒ¨');
+
+INSERT INTO ë‹µë³€(intent_id, answer_id, answer) VALUES (0, 0, 'ì•Œë ˆë¥´ê¸° ë³´ì—¬ì¤˜, ì±—ë´‡ ì•Œë³´ì…ë‹ˆë‹¤!\n\n1. ì•„ë˜ì˜ ë²„íŠ¼ì„ í†µí•´ í”„ëœì°¨ì´ì¦ˆ ëª©ë¡ì„ í™•ì¸í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.\n2. ë©”ë‰´ ì´ë¦„/í”„ëœì°¨ì´ì¦ˆ ëª…ì„ ì…ë ¥í•˜ì—¬ ê²€ìƒ‰í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.\n3. ì•Œë ˆë¥´ê¸° ì„±ë¶„ì„ ì±„íŒ…ìœ¼ë¡œ ì…ë ¥í•˜ì—¬, í•„í„°ë¥¼ ì ìš©í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.');
+INSERT INTO ë‹µë³€(intent_id, answer_id, answer) VALUES (1, 1, 'í”„ëœì°¨ì´ì¦ˆ ëª©ë¡ì…ë‹ˆë‹¤.\n\ní”„ëœì°¨ì´ì¦ˆ ëª…ì„ ì„ íƒí•˜ë©´ ë©”ë‰´ë¥¼ í™•ì¸í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.');
+INSERT INTO ë‹µë³€(intent_id, answer_id, answer) VALUES (2, 2, '%s í”„ëœì°¨ì´ì¦ˆì— ë“±ë¡ëœ ë©”ë‰´ ëª©ë¡ì…ë‹ˆë‹¤. ë©”ë‰´ë¥¼ ì„ íƒí•˜ì—¬ ì•Œë ˆë¥´ê¸° ì„±ë¶„ì„ í™•ì¸í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.');
+INSERT INTO ë‹µë³€(intent_id, answer_id, answer) VALUES (3, 3, '%s í”„ëœì°¨ì´ì¦ˆì— ë“±ë¡ëœ ë©”ë‰´ì…ë‹ˆë‹¤.\n\n%s ë©”ë‰´ ì•Œë ˆë¥´ê¸° ì„±ë¶„\n\n');
+INSERT INTO ë‹µë³€(intent_id, answer_id, answer) VALUES (4, 4, '%sì— í¬í•¨ëœ ì„±ë¶„ì…ë‹ˆë‹¤.\n%sê°€ í¬í•¨ëœ ë§¤ë‰´ë¥¼ í•„í„°ë§í•´ì„œ ë³´ì—¬ë“œë¦´ê¹Œìš”?');
+INSERT INTO ë‹µë³€(intent_id, answer_id, answer) VALUES (5, 5, '%s ì„±ë¶„ì´ í¬í•¨ëœ ë©”ë‰´ë¥¼ í•„í„°ë§í•˜ì˜€ìŠµë‹ˆë‹¤. ì´ì œë¶€í„° ë©”ë‰´ ê²€ìƒ‰ì‹œ, %s ì„±ë¶„ì´ í¬í•¨ëœ ë©”ë‰´ê°€ ì œì™¸ë©ë‹ˆë‹¤.');
+INSERT INTO ë‹µë³€(intent_id, answer_id, answer) VALUES (6, 6, 'ë“±ë¡ë˜ì§€ ì•Šì€ í”„ëœì°¨ì´ì¦ˆ ë˜ëŠ” ë©”ë‰´ì´ê±°ë‚˜, ì´í•´í•  ìˆ˜ ì—†ëŠ” ë‚´ìš©ì…ë‹ˆë‹¤.');
+
+INSERT INTO ë©”ì„¸ì§€(intent_id, question, answer_id) VALUES (0, 'ì‹œì‘í•˜ê¸°', 0);
+INSERT INTO ë©”ì„¸ì§€(intent_id, question, answer_id) VALUES (0, 'ì‹œì‘', 0);
+INSERT INTO ë©”ì„¸ì§€(intent_id, question, answer_id) VALUES (0, 'ì•ˆë…•?', 0);
+INSERT INTO ë©”ì„¸ì§€(intent_id, question, answer_id) VALUES (0, 'ì²˜ìŒìœ¼ë¡œ', 0);
+INSERT INTO ë©”ì„¸ì§€(intent_id, question, answer_id) VALUES (0, 'ì²˜ìŒ', 0);
+INSERT INTO ë©”ì„¸ì§€(intent_id, question, answer_id) VALUES (1, 'í”„ëœì°¨ì´ì¦ˆ ëª©ë¡',1);
+INSERT INTO ë©”ì„¸ì§€(intent_id, question, answer_id) VALUES (1, 'í”„ëœì°¨ì´ì¦ˆ',1);
+INSERT INTO ë©”ì„¸ì§€(intent_id, question, answer_id) VALUES (1, 'í”„ëœì°¨ì´ì¦ˆ ëª…',1);
+INSERT INTO ë©”ì„¸ì§€(intent_id, question, answer_id) VALUES (1, 'í”„ëœì°¨ì´ì¦ˆ ì´ë¦„',1);
+INSERT INTO ë©”ì„¸ì§€(intent_id, question, answer_id) VALUES (1, 'í”„ëœì°¨ì´ì¦ˆëª…',1);
+INSERT INTO ë©”ì„¸ì§€(intent_id, question, answer_id) VALUES (1, 'í”„ëœì°¨ì´ì¦ˆ ì´ë¦„ ë³´ì—¬ì¤˜',1);
+INSERT INTO ë©”ì„¸ì§€(intent_id, question, answer_id) VALUES (1, 'ë¬´ìŠ¨ í”„ëœì°¨ì´ì¦ˆ ìˆì–´?',1);
+INSERT INTO ë©”ì„¸ì§€(intent_id, question, answer_id) VALUES (1, 'í”„ëœì°¨ì´ì¦ˆ ëª©ë¡ ë³´ì—¬ì¤„ë˜?',1);
+INSERT INTO ë©”ì„¸ì§€(intent_id, question, answer_id) VALUES (2, 'BBQ',2);
+INSERT INTO ë©”ì„¸ì§€(intent_id, question, answer_id) VALUES (2, 'ê³µì°¨ ë©”ë‰´ ë³´ì—¬ì¤˜',2);
+INSERT INTO ë©”ì„¸ì§€(intent_id, question, answer_id) VALUES (2, 'í™ë£¨ì´ì   ë©”ë‰´',2);
+INSERT INTO ë©”ì„¸ì§€(intent_id, question, answer_id) VALUES (2, 'ìƒëŸ¬ë”” ë©”ë‰´ ê¶ê¸ˆí•´',2);
+INSERT INTO ë©”ì„¸ì§€(intent_id, question, answer_id) VALUES (2, 'ëª…ë‘ í•«ë„ê·¸ ë©”ë‰´',2);
+INSERT INTO ë©”ì„¸ì§€(intent_id, question, answer_id) VALUES (3, 'ì†Œê¸ˆìš°ìœ ë„ë„›',3);
+INSERT INTO ë©”ì„¸ì§€(intent_id, question, answer_id) VALUES (3, 'ì¹´í˜ë¼ë–¼',3);
+INSERT INTO ë©”ì„¸ì§€(intent_id, question, answer_id) VALUES (4, 'ì„±ë¶„ ìš°ìœ ',4);
+INSERT INTO ë©”ì„¸ì§€(intent_id, question, answer_id) VALUES (4, 'ì„±ë¶„ ë©”ë°€',4);
+INSERT INTO ë©”ì„¸ì§€(intent_id, question, answer_id) VALUES (4, 'ì„±ë¶„ ë°€',4);
+INSERT INTO ë©”ì„¸ì§€(intent_id, question, answer_id) VALUES (5, 'ì•Œë ˆë¥´ê¸° ì„±ë¶„ í•„í„°ë§ ë²„íŠ¼',5);
+INSERT INTO ë©”ì„¸ì§€(intent_id, question, answer_id) VALUES (6, 'ì•„ë¬´ ë§ì´ë‚˜ í•´ë³´ì', 6);
+INSERT INTO ë©”ì„¸ì§€(intent_id, question, answer_id) VALUES (6, 'ì˜¤ëŠ˜ ë‚ ì”¨ ì–´ë•Œ?', 6);
+INSERT INTO ë©”ì„¸ì§€(intent_id, question, answer_id) VALUES (6, 'ì•„ë¬´ ë§ì´ë‚˜ í•´ë³´ì', 6);
+INSERT INTO ë©”ì„¸ì§€(intent_id, question, answer_id) VALUES (6, 'ë©”ë‰´ ì¶”ì²œ í•´ì¤˜', 6);
+INSERT INTO ë©”ì„¸ì§€(intent_id, question, answer_id) VALUES (6, 'ë§Œë“¤ê¸° í˜ë“¤ì–´ìš”', 6);
+INSERT INTO ë©”ì„¸ì§€(intent_id, question, answer_id) VALUES (6, 'êµ³ì´ ì˜¤ë¥˜ ê´€ë ¨ ì˜ë„ë¥¼ ì§€ì •í•  í•„ìš”ê°€ ìˆì—ˆë‚˜?', 6);
+INSERT INTO ë©”ì„¸ì§€(intent_id, question, answer_id) VALUES (6, 'í•„ìš” ì—†ìœ¼ë©´ ê± ë¹¼ì•¼ì§€', 6);
+
+commit;
