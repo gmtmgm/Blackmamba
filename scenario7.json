@@ -1,0 +1,28 @@
+{
+    "event": "send",
+    "user": "al-2eGuGr5WQOnco1_V-FQ",
+
+    "compositeContent": {
+        "compositeList":[
+            {
+                "title": "입력 실패",
+                "description": "답변6",
+                "buttonList": [
+                    {
+                        "type": "TEXT",
+                        "data" : {
+                            "title": "이전으로",
+                            "code" : "이전으로"
+                        }
+                    },{
+                        "type": "TEXT",
+                        "data" : {
+                            "title": "처음으로",
+                            "code" : "처음으로"
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}

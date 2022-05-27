@@ -1,0 +1,71 @@
+{
+    "event": "send",
+    "user": "al-2eGuGr5WQOnco1_V-FQ",
+
+    "compositeContent": {
+        "compositeList":[
+            {
+                "title": "메뉴 목록",
+                "description": "답변2",
+                "buttonList": [
+                    {
+                        "type": "TEXT",
+                        "data" : {
+                            "title": "메뉴 1",
+                            "code" : "메뉴 1"
+                        }
+                    },
+                    {
+                        "type": "TEXT",
+                        "data" : {
+                            "title": "메뉴 2",
+                            "code" : "메뉴 2"
+                        }
+                    },
+                    {
+                        "type": "TEXT",
+                        "data" : {
+                            "title": "메뉴 3",
+                            "code" : "메뉴 3"
+                        }
+                    },
+                    {
+                        "type": "TEXT",
+                        "data" : {
+                            "title": "메뉴 4",
+                            "code" : "메뉴 4"
+                        }
+                    },
+                    {
+                        "type": "TEXT",
+                        "data" : {
+                            "title": "메뉴 5",
+                            "code" : "메뉴 5"
+                        }
+                    },
+                    {
+                        "type": "TEXT",
+                        "data" : {
+                            "title": "메뉴 6",
+                            "code" : "메뉴 6"
+                        }
+                    },
+                    {
+                        "type": "TEXT",
+                        "data": {
+                            "title": "메뉴 7",
+                            "code" : "메뉴 7"
+                        }
+                    },
+                    {
+                        "type": "TEXT",
+                        "data" : {
+                            "title": "이전으로",
+                            "code" : "이전으로"
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}

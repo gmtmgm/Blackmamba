@@ -1,0 +1,22 @@
+{
+    "event": "send",
+    "user": "al-2eGuGr5WQOnco1_V-FQ",
+
+    "compositeContent": {
+        "compositeList":[
+            {
+                "title": "알레르기 성분 확인",
+                "description": "답변3",
+                "buttonList": [
+                    {
+                        "type": "TEXT",
+                        "data" : {
+                            "title": "이전으로",
+                            "code" : "프랜차이즈 n"
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}
