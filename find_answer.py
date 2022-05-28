@@ -17,6 +17,8 @@ class FindAnswer:
             return 0
 
     def sort_tags(self, keywords):
+        if not keywords:
+            return(7, '')
         franchise = self.db.exedata("SELECT 이름 FROM 프랜차이즈")
         menu = self.db.exedata("SELECT 메뉴이름 FROM 메뉴")
         allergy = self.db.exedata("SELECT 이름 FROM 유발물질")
@@ -65,7 +67,6 @@ class FindAnswer:
 
     def search(self, tags, filter=False):
         intent_id = tags[0]
-        print(tags[1])
         if intent_id == 1:
             return ""
         elif intent_id == 2:
@@ -202,7 +203,7 @@ class FindAnswer:
         m_list = []
         if not filter:
             m_list.extend(self.db.exedata("""
-                SELECT 프랜차이즈.이름 || ' 프랜차이즈 - ' || 메뉴분류.분류이름
+                SELECT 프랜차이즈.이름 || ' - ' || 메뉴분류.분류이름
                 || ' 분류의 ' || 메뉴.메뉴이름
                 FROM 프랜차이즈, 메뉴분류, 메뉴
                 WHERE 프랜차이즈.고유번호 = 메뉴.프랜차이즈번호
@@ -211,10 +212,10 @@ class FindAnswer:
                     AND 메뉴.분류번호 = 메뉴분류.분류번호
                 GROUP BY 프랜차이즈.이름, 메뉴분류.분류이름, 메뉴.메뉴이름
                 ORDER BY 프랜차이즈.이름, 메뉴분류.분류이름, 메뉴.메뉴이름
-            """.format(m_tag)))
+            """.format("".join(m_tag))))
         else:
             sql = """
-                SELECT 프랜차이즈.이름 || ' 프랜차이즈 - ' || 메뉴분류.분류이름
+                SELECT 프랜차이즈.이름 || ' - ' || 메뉴분류.분류이름
                 || ' 분류의 ' || 메뉴.메뉴이름
                 FROM 프랜차이즈, 메뉴, 메뉴분류, 유발물질
                 WHERE 프랜차이즈.고유번호 = 메뉴.프랜차이즈번호
@@ -253,23 +254,23 @@ class FindAnswer:
                 AND 메뉴.메뉴이름 = '{}'
             GROUP BY 유발물질.이름
             ORDER BY 유발물질.이름
-        """.format(m_tag)))
+        """.format("".join(m_tag))))
         return a_list
     
     def allergy_check(self, m_tag, a_list): #메뉴에 성분이 포함되어 있는지
-        a_include = ""
-        a_exclude = ""
+        a_include = []
+        a_exclude = []
         for a in a_list:
             if a in self.allergy_find(m_tag):
-                a_include = a_include + "%s | " % a
+                a_include.append(a)
             else:
-                a_exclude = a_exclude + "%s | " % a
+                a_exclude.append(a)
         if a_include and a_exclude:
-            return a_include + "(이)가 포함되어 있고" + a_exclude + "(이)가 포함되어 있지 않습니다."
+            return ", ".join(a_include) + "(이)가 포함되어 있고, " + ", ".join(a_exclude) + "(이)가 포함되어 있지 않습니다."
         elif a_include and not a_exclude:
-            return a_include + "(이)가 포함되어 있습니다."
+            return ", ".join(a_include) + "(이)가 포함되어 있습니다."
         else:
-            return a_exclude + "(이)가 포함되어 있지 않습니다."
+            return ", ".join(a_exclude) + "(이)가 포함되어 있지 않습니다."
 
 
     def answer_text(self, keywords):
@@ -280,6 +281,10 @@ class FindAnswer:
         tag = []
         intentsql.extend(self.db.exedata(self.make_sql(intent_id)))
         answer = self.search(tags)
+        print("태그")
+        print(tags)
+        print("답")
+        print(answer)
         if intent_id == 1:
             return(intentsql.pop())
         elif intent_id == 2:
@@ -290,12 +295,10 @@ class FindAnswer:
         elif intent_id == 4:
             s = ""
             for a in answer:
-                print(a)
-                s = s + ("%s | " % a)
-                print(s)
+                s = s + (", ".join(a))
             return(s + intentsql.pop())
         elif intent_id == 6:
-            return(intentsql.pop() % tag[1] + answer)
+            return("".join(tags[1]) + " 메뉴에는 " + answer)
         print(answer)
         return answer
 
