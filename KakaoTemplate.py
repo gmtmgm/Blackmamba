@@ -106,7 +106,7 @@ def send_response(self,bot_resp):
         data_fr1 = '{"version": self.version,"template": {"outputs": [{"basicCard":'
         data_fr2 = '{"description": cur.answer_text(bot_resp, a_tags="%s")' % allergy
         data_ex1 = ',"thumbnail": {"imageUrl": "chatbot_image.jpg"},"buttons": '
-        data_ex2 = ' [{"action": "네","label": "네","messageText": "네"},'
+        data_ex2 = ' [{"action": filter_check("네"),"label": "네","messageText": "네"},'
         data_ex3 = '{"action": self.send_response(0),"label": "이전으로","messageText": "이전으로"}]}}]}}'
         datatext = data_fr1 + data_fr2 + data_ex1 + data_ex2 + data_ex3
         responseBody = json.loads(datatext)
