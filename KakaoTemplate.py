@@ -113,6 +113,8 @@ def send_response(self,bot_resp):
 
     if bot_resp == 5:
         allergy = db.search("알레르기 이름", a_filter, a_list)
+        a_filter = True
+        allergy.append(a_list)
         data_fr1 = '{"version": self.version,"template": {"outputs": [{"basicCard":'
         data_fr2 = '{"description": cur.answer_text(bot_resp, a_tags="%s")' % allergy
         data_ex1 = ',"thumbnail": {"imageUrl": "chatbot_image.jpg"},"buttons": '
